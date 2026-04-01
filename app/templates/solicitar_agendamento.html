@@ -1,0 +1,10 @@
+{% extends 'index.html' %} {% block content %}
+<div class="container mt-5">
+    <h2>Solicitar Horário no Poliesportivo</h2>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Enviar Solicitação</button>
+    </form>
+</div>
+{% endblock %}
