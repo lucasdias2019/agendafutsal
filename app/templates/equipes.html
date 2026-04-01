@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Equipes Cadastradas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+    <a href="{% url 'index' %}" class="btn btn-secondary mb-3">Voltar</a>
+    <h2>Lista de Equipes - AgendaFutsal</h2>
+    
+    <table class="table table-striped mt-4">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nome da Equipe</th>
+                <th>Responsável</th>
+                <th>WhatsApp</th>
+                <th>Uniforme</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipe in equipes %}
+            <tr>
+                <td>{{ equipe.nome }}</td>
+                <td>{{ equipe.responsavel }}</td>
+                <td>{{ equipe.whatsapp }}</td>
+                <td>{{ equipe.uniforme }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Nenhuma equipe cadastrada ainda.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

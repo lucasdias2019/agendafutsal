@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda do Poliesportivo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <a class="navbar-brand" href="/">AgendaFutsal</a>
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/">Home</a>
+            <a class="nav-item nav-link" href="/equipes/">Equipes</a>
+            <a class="nav-item nav-link active" href="/agendamentos/">Agendamentos</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Horários do Poliesportivo</h2>
+        <p>Consulte aqui a ocupação da quadra para amistosos e manutenções.</p>
+
+        <table class="table table-bordered mt-4">
+            <thead class="thead-light">
+                <tr>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Equipe/Evento</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for agendamento in agendamentos %}
+                <tr>
+                    <td>{{ agendamento.data|date:"d/m/Y" }}</td>
+                    <td>{{ agendamento.horario_inicio }} - {{ agendamento.horario_fim }}</td>
+                    <td>
+                        {% if agendamento.equipe %}
+                            {{ agendamento.equipe.nome }}
+                        {% else %}
+                            <span class="text-danger"><strong>MANUTENÇÃO / BLOQUEIO</strong></span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if agendamento.status == 'aprovado' %}
+                            <span class="badge badge-success">Aprovado</span>
+                        {% elif agendamento.status == 'pendente' %}
+                            <span class="badge badge-warning">Pendente</span>
+                        {% elif agendamento.status == 'reprovado' %}
+                            <span class="badge badge-danger">Reprovado</span>
+                        {% else %}
+                            <span class="badge badge-secondary">{{ agendamento.status }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">Nenhum horário registrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
